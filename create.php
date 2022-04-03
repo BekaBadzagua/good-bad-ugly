@@ -6,6 +6,31 @@
     // $statement = $pdo->prepare('SELECT * FROM movies');
     // $statement->execute();
 
+    // echo '<pre>';
+    // var_dump($_POST);
+    // echo '</pre>';
+
+    $errors = [
+        'image' => '',
+        'title' => '',
+        'description' => '',
+    ];
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if(!$_FILES['image']['name']){
+            $errors['image'] = 'Image is Required!';
+        }
+        if(!$_POST['title']){
+            $errors['title'] = 'Title is Required!';
+        }
+        if(!$_POST['description']){
+            $errors['description'] = 'Description is Required!';
+        }
+
+        if(!$errors['image'] && !$errors['title'] && !$errors['description']){
+            // Save the Movie
+            // Coming Soon..
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,20 +46,28 @@
 <body>
     <div class="content">
         <h1 class="header">Add Movie</h1>
-
         <section class="create-form">
             <form method="POST" enctype='multipart/form-data'>
                 <div class="form-group">
                     <label>Image</label>
                     <input type="file" name="image">
+                    <?php if($errors['image']): ?>
+                        <span class="error-message">* <?php echo $errors['image'] ?></span>
+                    <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" name="title">
+                    <input type="text" name="title" value="<?php echo $_POST['title']?>">
+                    <?php if($errors['title']): ?>
+                        <span class="error-message">* <?php echo $errors['title'] ?></span>
+                    <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <input type="text" name="description">
+                    <input type="text" name="description" value="<?php echo $_POST['description']?>">
+                    <?php if($errors['description']): ?>
+                        <span class="error-message">* <?php echo $errors['description'] ?></span>
+                    <?php endif ?>
                 </div>
                 <button type="submit" class="btn btn-primary btn-submit">Submit</button>
             </form>
