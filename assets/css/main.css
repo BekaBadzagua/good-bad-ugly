@@ -1,0 +1,20 @@
+
+
+body{
+    background-color:#f3d86f;
+}
+
+.dashboard img{
+    width:300px;
+}
+
+.content{
+    padding: 0 5% 0 5%;
+}
+.header{
+    padding: 20px 0;
+}
+.btn-add{
+    float:right;
+    margin-bottom: 20px;
+}
