@@ -1,21 +1,12 @@
 <?php 
+    require_once('utils.php');
+
     $pdo = new PDO('mysql:host=localhost;port=3306;dbname=common', 'common', '1234');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Coming Soon..
-    // $statement = $pdo->prepare('SELECT * FROM movies');
-    // $statement->execute();
-
-    // echo '<pre>';
-    // var_dump($_POST);
-    // echo '</pre>';
-
-    $errors = [
-        'image' => '',
-        'title' => '',
-        'description' => '',
-    ];
+    $errors = [];
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        // Validate
         if(!$_FILES['image']['name']){
             $errors['image'] = 'Image is Required!';
         }
@@ -26,9 +17,24 @@
             $errors['description'] = 'Description is Required!';
         }
 
+        // Upload Image
+        $imagePath = '';
+        if ($_FILES['image'] && $_FILES['image']['tmp_name']) {
+            $imagePath = 'assets/images/movies/' . randomString(8) . '/' . $_FILES['image']['name'];
+            mkdir(dirname($imagePath));
+            move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
+        }
+
+        // Upload Movie
         if(!$errors['image'] && !$errors['title'] && !$errors['description']){
-            // Save the Movie
-            // Coming Soon..
+            $statement = $pdo->prepare('INSERT INTO movies (image, title, description) VALUES (:image,:title,:description)');
+            $statement->bindValue(':image',$imagePath);
+            $statement->bindValue(':title',$_POST['title']);
+            $statement->bindValue(':description',$_POST['description']);
+            $statement->execute();
+
+            header("Location: index.php");
+            die();
         }
     }
 ?>

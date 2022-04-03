@@ -40,7 +40,11 @@
                     <?php foreach ($products as $index =>$product):?>
                     <tr>
                         <th scope="row"><?php echo $index+1; ?></th>
-                        <td><img src="https://searchengineland.com/wp-content/seloads/2015/08/movie-film-video-production-ss-1920.jpg" alt="movie_<?php echo $index+1; ?>"></td>
+                        <td>
+                            <?php if($product['image']):?>
+                                <img src="<?php echo $product['image'] ?>" alt="movie_<?php echo $index+1; ?>">
+                            <?php endif; ?>
+                        </td>
                         <td><?php echo $product['title']; ?></td>
                         <td><?php echo $product['description']; ?></td>
                         <td><button class="btn btn-info">Update</button></td>
