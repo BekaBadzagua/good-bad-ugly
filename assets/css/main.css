@@ -34,6 +34,12 @@ body{
 .create-form .form-group{
     margin-top:20px;
 }
+.create-form textarea, .create-form input{
+    width: 100%;
+}
+.create-form textarea{
+    min-height: 100px;
+}
 .errors-wrapper{
     background-color: rgb(252, 227, 231);
     padding:20px;

@@ -5,7 +5,7 @@
     $statement = $pdo->prepare('SELECT * FROM movies');
     $statement->execute();
 
-    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $movies = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +21,7 @@
 <body>
     <div class="content">
         <h1 class="header">Movies</h1>
-
-        <button class="btn btn-success btn-add">Add Movie</button>
+        <a href="create.php" type="button" class="btn btn-success btn-add">Add Movie</a>
 
         <section class="dashboard">
             <table class="table table-dark table-striped">
@@ -37,16 +36,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($products as $index =>$product):?>
+                    <?php foreach ($movies as $index =>$movie):?>
                     <tr>
                         <th scope="row"><?php echo $index+1; ?></th>
                         <td>
-                            <?php if($product['image']):?>
-                                <img src="<?php echo $product['image'] ?>" alt="movie_<?php echo $index+1; ?>">
+                            <?php if($movie['image']):?>
+                                <img src="<?php echo $movie['image'] ?>" alt="movie_<?php echo $index+1; ?>">
                             <?php endif; ?>
                         </td>
-                        <td><?php echo $product['title']; ?></td>
-                        <td><?php echo $product['description']; ?></td>
+                        <td><?php echo $movie['title']; ?></td>
+                        <td><?php echo $movie['description']; ?></td>
                         <td><button class="btn btn-info">Update</button></td>
                         <td><button class="btn btn-danger">Delete</button></td>
                     </tr>

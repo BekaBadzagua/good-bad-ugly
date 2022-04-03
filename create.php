@@ -70,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <input type="text" name="description" value="<?php echo $_POST['description']?>">
+                    <textarea  name="description" value="<?php echo $_POST['description']?>"></textarea>
                     <?php if($errors['description']): ?>
                         <span class="error-message">* <?php echo $errors['description'] ?></span>
                     <?php endif ?>
