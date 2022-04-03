@@ -47,7 +47,12 @@
                         <td><?php echo $movie['title']; ?></td>
                         <td><?php echo $movie['description']; ?></td>
                         <td><button class="btn btn-info">Update</button></td>
-                        <td><button class="btn btn-danger">Delete</button></td>
+                        <td>
+                            <form action="delete.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo $movie['id']?>">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>
