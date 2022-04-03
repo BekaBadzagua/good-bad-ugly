@@ -1,4 +1,12 @@
+<?php 
+    $pdo = new PDO('mysql:host=localhost;port=3306;dbname=common', 'common', '1234');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    $statement = $pdo->prepare('SELECT * FROM movies');
+    $statement->execute();
+
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,34 +34,19 @@
                         <th scope="col">description</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($products as $index =>$product):?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td><img src="https://searchengineland.com/wp-content/seloads/2015/08/movie-film-video-production-ss-1920.jpg" alt="movie_1"></td>
-                        <td>Lord of the Rings</td>
-                        <td>Use your own words, or search with titles, actors, directors, genres etc. We find movies for you to watch. Search tips.</td>
+                        <th scope="row"><?php echo $index+1; ?></th>
+                        <td><img src="https://searchengineland.com/wp-content/seloads/2015/08/movie-film-video-production-ss-1920.jpg" alt="movie_<?php echo $index+1; ?>"></td>
+                        <td><?php echo $product['title']; ?></td>
+                        <td><?php echo $product['description']; ?></td>
                         <td><button class="btn btn-info">Update</button></td>
                         <td><button class="btn btn-danger">Delete</button></td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td><img src="https://searchengineland.com/wp-content/seloads/2015/08/movie-film-video-production-ss-1920.jpg" alt="movie_1"></td>
-                        <td>Jacob</td>
-                        <td>Use your own words, or search with titles, actors, directors, genres etc. We find movies for you to watch. Search tips.</td>
-                        <td><button class="btn btn-info">Update</button></td>
-                        <td><button class="btn btn-danger">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td><img src="https://searchengineland.com/wp-content/seloads/2015/08/movie-film-video-production-ss-1920.jpg" alt="movie_1"></td>
-                        <td>Larry the Bird</td>
-                        <td>Use your own words, or search with titles, actors, directors, genres etc. We find movies for you to watch. Search tips.</td>
-                        <td><button class="btn btn-info">Update</button></td>
-                        <td><button class="btn btn-danger">Delete</button></td>
-                    </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </section>
