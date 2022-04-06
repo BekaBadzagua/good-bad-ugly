@@ -1,8 +1,8 @@
 <?php 
-    require_once('shared/utils.php');
-    require_once('shared/validation.php');
-    require_once('shared/imageTools.php');
-    $pdo = require_once 'database/database.php';
+    require_once('../../utils/utils.php');
+    require_once('../../utils/validation.php');
+    require_once('../../utils/imageTools.php');
+    $pdo = require_once '../../database/database.php';
     
     $errors = [];
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -25,7 +25,7 @@
     }
 ?>
 
-<?php require_once "views/layout/header.php"?>
+<?php require_once "../../views/layout/header.php"?>
     <h1 class="header">Add Movie</h1>
     <section class="create-form">
         <form method="POST" enctype='multipart/form-data'>
@@ -53,4 +53,4 @@
             <button type="submit" class="btn btn-primary btn-submit">Submit</button>
         </form>
     </section>
-<?php require_once "views/layout/footer.php" ?>
+<?php require_once "../../views/layout/footer.php" ?>

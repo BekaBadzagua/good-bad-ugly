@@ -1,5 +1,5 @@
 <?php 
-    $pdo = require_once 'database/database.php';
+    $pdo = require_once '../../database/database.php';
 
     if (!$_POST['id']) {
         header('Location: index.php');
