@@ -1,6 +1,8 @@
 <?php 
-    require_once('shared/utils.php');
     $pdo = require_once 'database/database.php';
+    require_once('shared/validation.php');
+    require_once('shared/imageTools.php');
+    require_once('shared/utils.php');
 
     if(!$_GET['id'] && !$_POST['id']){
         header('Location: index.php');
@@ -19,24 +21,11 @@
 
     $errors = [];
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        // Validate
-        if(!$_POST['title']){
-            $errors['title'] = 'Title is Required!';
-        }
-        if(!$_POST['description']){
-            $errors['description'] = 'Description is Required!';
-        }
 
-        // Upload Image
-        $imagePath = null;
-        if ($_FILES['image'] && $_FILES['image']['tmp_name']) {
-            if($movie['image']){
-                unlink($movie['image']);
-            }
-            $imagePath = 'assets/images/movies/' . randomString(8) . '/' . $_FILES['image']['name'];
-            mkdir(dirname($imagePath));
-            move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
-        }
+        $errors = validate($_POST['title'], $_POST['description']);
+
+        deleteImage($movie['image']);
+        $imagePath = uploadImage($_FILES['image']);
 
         // Update Movie
         if(!$errors['title'] && !$errors['description']){
@@ -62,9 +51,9 @@
     <h1 class="header">Update Movie <?php echo $id?></h1>
     <section class="create-form">
         <form method="POST" enctype='multipart/form-data'>
-        <div class="form-group">
-            <input type="hidden" name="id" value="<?php echo $_GET['id']?>">
-        </div>
+            <div class="form-group">
+                <input type="hidden" name="id" value="<?php echo $_GET['id']?>">
+            </div>
             <div class="form-group">
                 <label>Image</label>
                 <input type="file" name="image">

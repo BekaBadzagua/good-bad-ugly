@@ -1,27 +1,15 @@
 <?php 
     require_once('shared/utils.php');
+    require_once('shared/validation.php');
+    require_once('shared/imageTools.php');
     $pdo = require_once 'database/database.php';
     
     $errors = [];
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        // Validate
-        if(!$_FILES['image']['name']){
-            $errors['image'] = 'Image is Required!';
-        }
-        if(!$_POST['title']){
-            $errors['title'] = 'Title is Required!';
-        }
-        if(!$_POST['description']){
-            $errors['description'] = 'Description is Required!';
-        }
 
-        // Upload Image
-        $imagePath = '';
-        if ($_FILES['image'] && $_FILES['image']['tmp_name']) {
-            $imagePath = 'assets/images/movies/' . randomString(8) . '/' . $_FILES['image']['name'];
-            mkdir(dirname($imagePath));
-            move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
-        }
+        $errors = validate($_POST['title'], $_POST['description'], $_FILES['image']);
+
+        $imagePath = uploadImage($_FILES['image']);
 
         // Upload Movie
         if(!$errors['image'] && !$errors['title'] && !$errors['description']){
