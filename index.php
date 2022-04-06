@@ -46,7 +46,7 @@
                         </td>
                         <td><?php echo $movie['title']; ?></td>
                         <td><?php echo $movie['description']; ?></td>
-                        <td><button class="btn btn-info">Update</button></td>
+                        <td><a href="update.php?id=<?php echo $movie['id'];?>" type="button" class="btn btn-info">Update</button></td>
                         <td>
                             <form action="delete.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo $movie['id']?>">
