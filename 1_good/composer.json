@@ -1,0 +1,15 @@
+{
+    "name": "kakashi/good",
+    "authors": [
+        {
+            "name": "beka",
+            "email": "beka.badzagua@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    }
+}
