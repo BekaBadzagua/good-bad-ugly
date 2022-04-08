@@ -7,11 +7,11 @@ use app\controllers\MovieController;
 
 $router = new Router();
 
-$router->get('/',         [MovieController:class,'index']);
-$router->get('/create',   [MovieController:class,'create']);
-$router->post('/create',  [MovieController:class,'create']);
-$router->get('/update',   [MovieController:class,'update']);
-$router->post('/update',  [MovieController:class,'update']);
-$router->post('/destroy', [MovieController:class,'destroy']);
+$router->get('/',         [new MovieController(),'index']);
+$router->get('/create',   [new MovieController(),'create']);
+$router->post('/create',  [new MovieController(),'create']);
+$router->get('/update',   [new MovieController(),'update']);
+$router->post('/update',  [new MovieController(),'update']);
+$router->post('/destroy', [new MovieController(),'destroy']);
 
 $router->resolve();
