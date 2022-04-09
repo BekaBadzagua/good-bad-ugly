@@ -1,5 +1,5 @@
 <h1 class="header">Movies</h1>
-<a href="/public/pages/create.php" type="button" class="btn btn-success btn-add">Add Movie</a>
+<a href="/create" type="button" class="btn btn-success btn-add">Add Movie</a>
 
 <section class="dashboard">
     <table class="table table-dark table-striped">
@@ -24,9 +24,9 @@
                 </td>
                 <td><?php echo $movie['title']; ?></td>
                 <td><?php echo $movie['description']; ?></td>
-                <td><a href="/public/pages/update.php?id=<?php echo $movie['id'];?>" type="button" class="btn btn-info">Update</button></td>
+                <td><a href="/update?id=<?php echo $movie['id'];?>" type="button" class="btn btn-info">Update</button></td>
                 <td>
-                    <form action="/public/pages/delete.php" method="post">
+                    <form action="/delete" method="post">
                         <input type="hidden" name="id" value="<?php echo $movie['id']?>">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\database\Database;
+use app\models\Movie;
 use app\Router;
 
 class MovieController
@@ -15,19 +16,24 @@ class MovieController
         return $router->renderView('movies/index',['movies'=>$movies]);
     }
     
-    public function create()
+    public function create(Router $router)
     {
-        // Coming Soon..
-        return 'create Route';
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $movie = new Movie($_POST['id'],$_POST['title'],$_POST['description'],$_FILES['image']);
+            $movie->save();
+            header('Location: /');
+            exit;
+        }
+        return $router->renderView('movies/create');
     }
     
-    public function update()
+    public function update(Router $router)
     {
         // Coming Soon..
         return 'update Route';
     }
     
-    public function destroy()
+    public function delete(Router $router)
     {
         // Coming Soon..
         return 'destroy Route';
