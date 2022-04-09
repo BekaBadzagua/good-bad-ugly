@@ -2,16 +2,17 @@
 
 namespace app\controllers;
 
+use app\database\Database;
 use app\Router;
 
 class MovieController
 {
     public function index(Router $router)
     {
-        // take data from database
+        $database = new Database();
+        $movies = $database->getMovies();
 
-        // render view
-        return $router->renderView('movies/index',['foo'=>'asdasdasd']);
+        return $router->renderView('movies/index',['movies'=>$movies]);
     }
     
     public function create()
