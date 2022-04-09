@@ -36,4 +36,18 @@ class Router
             exit;
         }
     }
+
+    public function renderView($view,$params = [])
+    {
+        foreach($params as $key => $value)
+        {
+            $$key = $value;
+        }
+        $BASE_DIR = dirname(dirname(__FILE__));
+
+        ob_start();
+        include $BASE_DIR."/views/$view.php";
+        $content = ob_get_clean();
+        include $BASE_DIR."/views/_layout.php";
+    }
 }

@@ -2,13 +2,16 @@
 
 namespace app\controllers;
 
+use app\Router;
+
 class MovieController
 {
-    public function index()
+    public function index(Router $router)
     {
-        // Coming Soon..
-        echo 'index Route';
-        return 'index Route';
+        // take data from database
+
+        // render view
+        return $router->renderView('movies/index',['foo'=>'asdasdasd']);
     }
     
     public function create()
