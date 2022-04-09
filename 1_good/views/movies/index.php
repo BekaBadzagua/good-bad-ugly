@@ -24,9 +24,9 @@
                 </td>
                 <td><?php echo $movie['title']; ?></td>
                 <td><?php echo $movie['description']; ?></td>
-                <td><a href="/update?id=<?php echo $movie['id'];?>" type="button" class="btn btn-info">Update</button></td>
+                <td><a href="../public/update?id=<?php echo $movie['id'];?>" type="button" class="btn btn-info">Update</button></td>
                 <td>
-                    <form action="/delete" method="post">
+                    <form action="../public/delete" method="post">
                         <input type="hidden" name="id" value="<?php echo $movie['id']?>">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

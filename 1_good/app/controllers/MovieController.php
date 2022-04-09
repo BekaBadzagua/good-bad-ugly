@@ -29,8 +29,17 @@ class MovieController
     
     public function update(Router $router)
     {
-        // Coming Soon..
-        return 'update Route';
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $movie = new Movie($_POST['id'],$_POST['title'],$_POST['description'],$_FILES['image']);
+            $movie->save();
+            header('Location: /public');
+            exit;
+        }
+        else{
+            $database = new Database();
+            $movie = $database->getMovie($_GET['id']);
+            return $router->renderView('movies/update',['movie'=>$movie]);
+        }
     }
     
     public function delete(Router $router)

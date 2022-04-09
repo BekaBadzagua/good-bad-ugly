@@ -7,13 +7,13 @@ use app\utils\Utils;
 
 class Movie
 {
-    public ?int $id = null;
+    public ?string $id = null;
     public ?string $title = null;
     public ?string $description = null;
     public ?array $image = null;
     public ?string $imagePath = null;
 
-    function __construct(int $id = null, string $title = null, string $description = null, mixed $image = null)
+    function __construct(string $id = null, string $title = null, string $description = null, mixed $image = null)
     {
         $this->id = $id;
         $this->title = $title;
@@ -28,7 +28,12 @@ class Movie
                 $this->imagePath = Utils::uploadImage($this->image);
             }
             $database = new Database();
-            $database->createMovie($this);
+            if($this->id){
+                $database->updateMovie($this);
+            }
+            else {
+                $database->createMovie($this);
+            }
         }
     }
 

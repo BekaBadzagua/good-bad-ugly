@@ -23,6 +23,13 @@ class Database
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getMovie($id)
+    {
+        $statement = $this->pdo->prepare('SELECT * FROM movies Where id = :id');
+        $statement->bindValue(':id',$id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+    }
 
     public function createMovie(Movie $movie)
     {
@@ -32,5 +39,18 @@ class Database
         $statement->bindValue(':description',$movie ->description);
         $statement->execute();
     }
-
+    public function updateMovie(Movie $movie)
+    {
+        if($movie->imagePath){
+            $statement = $this->pdo->prepare("UPDATE movies SET title=:title, image =:image, description=:description  WHERE id = :id;");
+            $statement->bindValue(':image', $movie->imagePath);
+        }
+        else{
+            $statement = $this->pdo->prepare('UPDATE movies SET title = :title, description =:description  WHERE id = :id;');
+        }
+        $statement->bindValue(':id', $movie->id);
+        $statement->bindValue(':title', $movie->title);
+        $statement->bindValue(':description', $movie->description);
+        $statement->execute();
+    }
 }
