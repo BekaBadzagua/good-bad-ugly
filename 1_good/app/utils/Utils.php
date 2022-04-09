@@ -25,4 +25,12 @@ class Utils
             return $imagePath;
         }
     }
+
+    static public function deleteImage(string $path) : void
+    {
+        $fullPath = dirname(dirname(__DIR__)).$path;
+        if($fullPath && file_exists($fullPath)){
+            unlink($fullPath);
+        }
+    }
 }

@@ -12,6 +12,6 @@ $router->get('/create',   [new MovieController(),'create']);
 $router->post('/create',  [new MovieController(),'create']);
 $router->get('/update',   [new MovieController(),'update']);
 $router->post('/update',  [new MovieController(),'update']);
-$router->post('/destroy', [new MovieController(),'destroy']);
+$router->post('/delete', [new MovieController(),'delete']);
 
 $router->resolve();

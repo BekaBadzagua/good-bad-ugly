@@ -24,10 +24,12 @@ class Movie
     public function save()
     {
         if($this->isValid()){
+            $database = new Database();
             if($this->image){
+                $movie = $database->getMovie($this->id);
+                Utils::deleteImage($movie['image']);
                 $this->imagePath = Utils::uploadImage($this->image);
             }
-            $database = new Database();
             if($this->id){
                 $database->updateMovie($this);
             }

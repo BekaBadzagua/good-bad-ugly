@@ -42,9 +42,11 @@ class MovieController
         }
     }
     
-    public function delete(Router $router)
+    public function delete()
     {
-        // Coming Soon..
-        return 'destroy Route';
+        $database = new Database();
+        $database->deleteMovie($_POST['id']);
+        header('Location: /public');
+        exit;
     }
 }
