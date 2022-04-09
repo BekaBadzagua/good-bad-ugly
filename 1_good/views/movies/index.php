@@ -1,5 +1,5 @@
 <h1 class="header">Movies</h1>
-<a href="/create" type="button" class="btn btn-success btn-add">Add Movie</a>
+<a href="../public/create" type="button" class="btn btn-success btn-add">Add Movie</a>
 
 <section class="dashboard">
     <table class="table table-dark table-striped">
@@ -19,7 +19,7 @@
                 <th scope="row"><?php echo $index+1; ?></th>
                 <td>
                     <?php if($movie['image']):?>
-                        <img src="<?php echo '/'.$movie['image'] ?>" alt="movie_<?php echo $index+1; ?>">
+                        <img src="<?php echo $movie['image'] ?>" alt="movie_<?php echo $index+1; ?>">
                     <?php endif; ?>
                 </td>
                 <td><?php echo $movie['title']; ?></td>

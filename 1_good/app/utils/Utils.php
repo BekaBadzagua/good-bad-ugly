@@ -19,10 +19,9 @@ class Utils
     static public function uploadImage(array $image) : string
     {
         if ($image && $image['tmp_name']) {
-            $imagePath = dirname(dirname(__DIR__))."/public/images/" .Utils::randomString(8)."/".$image['name'];
-            mkdir(dirname($imagePath));
-            move_uploaded_file($image['tmp_name'], $imagePath);
-    
+            $imagePath = "/public/images/" .Utils::randomString(8)."/".$image['name'];
+            mkdir(dirname(dirname(dirname(__DIR__)).$imagePath));
+            move_uploaded_file($image['tmp_name'], dirname(dirname(__DIR__)).$imagePath);
             return $imagePath;
         }
     }

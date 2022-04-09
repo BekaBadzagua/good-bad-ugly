@@ -43,7 +43,7 @@ class Router
         {
             $$key = $value;
         }
-        $BASE_DIR = dirname(dirname(__FILE__));
+        $BASE_DIR = dirname(__DIR__);
 
         ob_start();
         include $BASE_DIR."/views/$view.php";

@@ -21,7 +21,7 @@ class MovieController
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $movie = new Movie($_POST['id'],$_POST['title'],$_POST['description'],$_FILES['image']);
             $movie->save();
-            header('Location: /');
+            header('Location: /public');
             exit;
         }
         return $router->renderView('movies/create');
